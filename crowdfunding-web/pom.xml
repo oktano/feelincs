@@ -95,6 +95,7 @@
 			<scope>provided</scope>
 		</dependency>
 
+	 <!--  
 	   <dependency>
 			<groupId>org.jboss.weld</groupId>
 			<artifactId>weld-core</artifactId>
@@ -107,7 +108,7 @@
 			<version>2.2.SP3</version>			
 			<scope>provided</scope>
 		</dependency>
-    
+   --> 
 	  	<dependency>
 		    <groupId>com.reactiveiq.crowdfunding</groupId>
 		    <artifactId>crowdfunding-services</artifactId>
@@ -327,10 +328,13 @@
 		</dependency>		
 		
 		<!-- http://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
-		<dependency>
+	<!--	<dependency>
 		    <groupId>com.amazonaws</groupId>
 		    <artifactId>aws-java-sdk-s3</artifactId>
 		    <version>1.11.7</version>
-		</dependency>			
+		</dependency>	
+		
+	 -->
+	 		
 	</dependencies>
 </project>		
