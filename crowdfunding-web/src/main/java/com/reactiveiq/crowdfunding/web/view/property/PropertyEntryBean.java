@@ -23,7 +23,7 @@ public class PropertyEntryBean implements Serializable {
 	
 	
 	@Inject 
-	private PropertyService propertyService;
+	private transient PropertyService propertyService;
 
 	private Property property = new Property();
 	
