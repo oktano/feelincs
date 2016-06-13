@@ -35,6 +35,7 @@
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
+					<warName>ROOT</warName>
 				</configuration>
 			</plugin>
     	</plugins>
