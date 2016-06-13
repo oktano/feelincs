@@ -39,7 +39,7 @@
 					<warName>ROOT</warName>
 				<webResources>
 					   <resource>
-					    <directory>/src/main/resources/lib/</directory>
+					    <directory>${project.basedir}/src/main/resources/lib/</directory>
 					    <targetPath>WEB-INF/lib</targetPath>
 					   </resource>
 				 </webResources>
