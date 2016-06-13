@@ -22,10 +22,6 @@
         <h:form id="menuform">
             <ps:menu id="sm_leftmenu">
                 <p:menuitem id="sm_dashboard" value="#{msgs['label.menu.left.dashboard']}" icon="icon-home-outline" outcome="dashboard" containerStyleClass="layout-menubar-active"/>
-            	  	<sec:authorize ifAnyGranted="SPONSOR">
-            			<p:menuitem id="sm_property_entry" value="#{msgs['label.menu.left.propertyrentry']}" icon="icon-home-outline" outcome="/sponsor/property" containerStyleClass="layout-menubar-active"/>
-        	 		</sec:authorize>
-        
              </ps:menu>
         </h:form>
       
