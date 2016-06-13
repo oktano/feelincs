@@ -1,5 +1,7 @@
 package com.reactiveiq.crowdfunding.web.view.property;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -15,7 +17,7 @@ import com.reactiveiq.crowdfunding.web.utils.MessageUtilBean;
 
 @ViewScoped
 @Named("propertyEntryBean")
-public class PropertyEntryBean {
+public class PropertyEntryBean implements Serializable {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
