@@ -17,29 +17,7 @@
    <build>
         <finalName>crowdfunding-web-${project.version}</finalName>
         <plugins>
-        
-        <plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-install-plugin</artifactId>
-			  <executions>
-			    <execution>
-			      <id>install-external</id>
-			      <phase>clean</phase>
-			      <configuration>
-			        <file>${project.basedir}/src/main/resources/lib/sentinel-theme-2.0.2.jar</file>
-			        <repositoryLayout>default</repositoryLayout>
-			        <groupId>ykyuen.info</groupId>
-			        <artifactId>eureka</artifactId>
-			        <version>0.0.1</version>
-			        <packaging>jar</packaging>
-			        <generatePom>true</generatePom>
-			      </configuration>
-			      <goals>
-			        <goal>install-file</goal>
-			      </goals>
-			    </execution>
-			  </executions>
-			</plugin>
+      
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -59,6 +37,12 @@
 						</manifest>
 					</archive>
 					<warName>ROOT</warName>
+				<webResources>
+					   <resource>
+					    <directory>/src/main/resources/lib/</directory>
+					    <targetPath>WEB-INF/lib</targetPath>
+					   </resource>
+				 </webResources>
 				</configuration>
 			</plugin>
 			
@@ -103,8 +87,8 @@
 		    <groupId>org.primefaces.themes</groupId>  
 		    <artifactId>sentinel-theme</artifactId>  
 		    <version>2.0.2</version>  
-		   <!--  <scope>system</scope> -->	
-        <!--  	<systemPath>${project.basedir}/src/main/resources/lib/sentinel-theme-2.0.2.jar</systemPath> -->		    
+		    <scope>system</scope>
+        	<systemPath>${project.basedir}/src/main/resources/lib/sentinel-theme-2.0.2.jar</systemPath>		    
 	    </dependency>  
 			
 		<dependency>
