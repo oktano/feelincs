@@ -10,7 +10,13 @@
       <class>com.reactiveiq.crowdfunding.domain.AccountStatus</class>
       <class>com.reactiveiq.crowdfunding.domain.Role</class>
       <class>com.reactiveiq.crowdfunding.domain.UserRole</class>
- 
+      <class>com.reactiveiq.crowdfunding.domain.Address</class>
+ 	  <class>com.reactiveiq.crowdfunding.domain.Document</class>
+ 	  <class>com.reactiveiq.crowdfunding.domain.LocaleValue</class>
+ 	  <class>com.reactiveiq.crowdfunding.domain.LookupData</class>
+ 	  <class>com.reactiveiq.crowdfunding.domain.LookupDataType</class>
+ 	  <class>com.reactiveiq.crowdfunding.domain.Property</class>
+ 	  	
        <exclude-unlisted-classes>false</exclude-unlisted-classes>
        <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
