@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xmlns:aop="http://www.springframework.org/schema/aop"   
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation= "http://www.springframework.org/schema/beans
+    					 http://www.springframework.org/schema/beans/spring-beans.xsd
+ 						 http://www.springframework.org/schema/context
+						 http://www.springframework.org/schema/context/spring-context.xsd
+	                     http://www.springframework.org/schema/security
+                         http://www.springframework.org/schema/security/spring-security.xsd
+  						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd					   
+ 					   http://www.springframework.org/schema/jee
+					   http://www.springframework.org/schema/jee/spring-jee-3.0.xsd ">
+ 
+ 
+    <context:annotation-config />
+	<context:component-scan base-package="com.reactiveiq.crowdfunding.security.impl"/>
+  
+ <aop:aspectj-autoproxy/> 
+ 
+
+<context:load-time-weaver/>
+
+    <global-method-security 
+    		secured-annotations="enabled" jsr250-annotations="enabled" pre-post-annotations="enabled" >
+    </global-method-security>
+
+    <http use-expressions="true" > 
+       <access-denied-handler error-page="/401.html" />
+	     <headers>
+	        <xss-protection />
+	    </headers>  
+    	<csrf />
+    	<!-- once-per-request is important for forward once-per-request="false"-->
+        <intercept-url pattern="/login.html" access="permitAll"/>
+        <intercept-url pattern="/*" access="hasRole('USER')"/>
+        <intercept-url pattern="/statics/**" access="hasRole('USER')"/>
+  
+   
+  		<form-login
+			login-processing-url="/j_spring_security_check"
+			login-page="/login.html"
+			 always-use-default-target="true"
+			default-target-url="/dashbaord.html"/>
+
+        <logout invalidate-session="true"  logout-url="/logout" logout-success-url="/login.html" />
+  		<session-management invalid-session-url="/login.html">
+  		      <concurrency-control max-sessions="1"  expired-url="/login.html" />
+  		</session-management>
+            
+    </http> 
+  
+	<!--
+	<beans:bean id="sas" class="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy">
+	  <beans:constructor-arg>
+	    <beans:list>
+	      <beans:bean class="org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy">
+	        <beans:constructor-arg ref="sessionRegistry"/>
+	        <beans:property name="maximumSessions" value="1" />
+	        <beans:property name="exceptionIfMaximumExceeded" value="true" />
+	      </beans:bean>
+	      <beans:bean class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy">
+	      </beans:bean>
+	      <beans:bean class="org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy">
+	        <beans:constructor-arg ref="sessionRegistry"/>
+	      </beans:bean>
+	    </beans:list>
+	  </beans:constructor-arg>
+	</beans:bean>
+	-->
+	<beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+ 
+  
+    <authentication-manager alias="authenticationManager">
+    
+        <authentication-provider user-service-ref ="userDetailsService"> 
+        	<password-encoder hash="sha-256" >
+    			<salt-source user-property="username"/>
+  			</password-encoder> 
+        </authentication-provider> 
+    </authentication-manager>
+
+
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basenames">
+		    <beans:list>
+				<beans:value>messages</beans:value>
+		    </beans:list>
+		</beans:property>
+   </beans:bean>
+  
+   <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <beans:property name="defaultLocale" value="en" />
+    </beans:bean>
+
+<!-- <beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"> -->
+<!--     <beans:property name="basename" value="messages"/> -->
+<!--   </beans:bean> -->
+
+  
+    <!-- Automatically receives AuthenticationEvent messages -->
+    <beans:bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
+</beans:beans>

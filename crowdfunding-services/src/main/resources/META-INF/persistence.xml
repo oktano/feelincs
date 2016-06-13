@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+              
+   <persistence-unit name="crowdFunding" transaction-type="JTA">
+      <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+      <jta-data-source>dcmmDS</jta-data-source>  
+      <class>com.reactiveiq.crowdfunding.domain.Account</class>
+      <class>com.reactiveiq.crowdfunding.domain.AccountStatus</class>
+      <class>com.reactiveiq.crowdfunding.domain.Role</class>
+      <class>com.reactiveiq.crowdfunding.domain.UserRole</class>
+ 
+       <exclude-unlisted-classes>false</exclude-unlisted-classes>
+       <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+         <property name="hibernate.hbm2ddl.auto" value="update"/>
+         <property name="hibernate.show_sql" value="false"/>
+         <property name="hibernate.format_sql" value="false"/>
+         <property name="hibernate.default_schema" value=""/>
+         <property name="hibernate.max_fetch_depth" 				value="2" />
+		 <property name="hibernate.connection.useUnicode" 			value="true" />
+		 <property name="hibernate.connection.characterEncoding"	value="UTF-8" />
+		 <property name="hibernate.cache.use_second_level_cache"	value="true" />
+		 <property name="hibernate.cache.use_query_cache" 			value="false" />
+		 <property name="hibernate.jdbc.batch_size" 				value="50000"/>
+		 <property name="hibernate.jdbc.fetch_size" 				value="50000"/>
+		 <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
+		 <property name="hibernate.archive.autodetection" value="class"/>
+		 <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
+
+         <property name="net.sf.ehcache.configurationResourceName" value="ecache.xml" />
+		 
+		<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>		 
+ 	
+		 <property name="hibernate.query.substitutions" value="true 1, false 0"/>
+		 <property name="hibernate.connection.defaultNChar" value = "true"/>
+      </properties>
+   </persistence-unit>
+</persistence>

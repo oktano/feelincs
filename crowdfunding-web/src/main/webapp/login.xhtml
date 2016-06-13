@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><h:outputText value="#{msgs['label.meta.sitetitle']}"/></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        
+    <h:outputScript name="js/login.js" library="sentinel-layout" />
+    <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+    <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
+    <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+</h:head>
+
+<h:body class="fontRegular login-back white-back">
+    
+    <div class="Container">
+        <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter PaddingTopPercent10">
+           <!-- 
+            <a href="" id="login-logo">
+                <h:graphicImage name="images/LOGO.svg" styleClass="Fleft" library="sentinel-layout"/>
+                <span class="Fs30 FontTitilliumSemiBoldItalic Fleft"><span class="softblue"><h:outputText value="#{msgs['label.login.header.part1']}" escape="false"/></span><span class="hardblue"><h:outputText value="#{msgs['label.login.header.part2']}"/></span></span>
+            </a>
+            -->
+            <div class="EmptyBox60"></div>
+        </div>
+
+        <!-- LOGIN BOX COVER START -->
+        <p:growl autoUpdate="true"/>
+        <div class="Container80 MaxWid500 white-back Fnone MarAuto BordRad10" id="login-box">
+            <div class="Container">
+                <div class="Container50 TexAlCenter Animated05 BoxSizeBorder TabBtn left TabBtnActiveLeft" role="1">
+                    <div class="Container80 Fnone MarAuto FontBold"><i class="icon-lock"></i> <h:outputText value="#{msgs['label.login.title']}"/></div>
+                </div>
+                <div class="Container50 TexAlCenter Animated05 BoxSizeBorder TabBtn right" role="2">
+                    <div class="Container80 Fnone MarAuto FontBold"><i class="icon-key-1"></i> <h:outputText value="#{msgs['label.login.permissions']}"/></div>
+                </div>
+    			<h:form prependId="false" >				      	
+     				<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 					      		          	
+
+		                <div class="Container90 Fnone MarAuto TexAlCenter TabContent OvHidden" id="TAB1">
+		                    <div class="EmptyBox50"></div>
+				  			<p:inputText styleClass="Container80 Fnone MarAuto Fs18" id="email" name="email" placeholder="Ex: xyz@yourdomain.com" maxlength="30"  value="#{loginBean.userName}" required="true" requiredMessage="#{msgs['label.login.userId']} #{msgs['label.required']}" />
+		                    <div class="EmptyBox10"></div>
+		                    
+		                    <p:password maxlength="16" value="#{loginBean.password}"  required="true" requiredMessage="#{msgs['label.login.password']} #{msgs['label.required']}" placeholder="Password" styleClass="Container80 Fnone MarAuto Fs18" feedback="false"/>
+		                    <div class="EmptyBox30"></div>
+              				<p:commandButton value="#{msgs['label.login.login']}" action="#{loginBean.login}" styleClass="Fs16" update="@form" onclick="PF('uiblocker').show();" oncomplete="PF('uiblocker').hide();" onerror="PF('uiblocker').hide();" />
+		                    <div class="EmptyBox50"></div>
+		                </div>
+					</h:form>
+   				<h:form prependId="false" id="form2" >				      	
+     				<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 					      		          	
+					
+	                <div class="Container90 Fnone MarAuto DispNone TexAlCenter TabContent OvHidden" id="TAB2">
+	                    <div class="EmptyBox50"></div>
+	                    <p:inputText  placeholder="#{msgs['label.login.firstname']}" requiredMessage="#{msgs['label.login.firstname']} #{msgs['label.required']}" required="true" maxlength="30" value="#{signupBean.account.firstName}" styleClass="Container80 Fnone MarAuto Fs18"/>
+		                <div class="EmptyBox10"></div>
+	                    <p:inputText placeholder="#{msgs['label.login.lastname']}" requiredMessage="#{msgs['label.login.lastname']} #{msgs['label.required']}" required="true" maxlength="30" value="#{signupBean.account.lastName}" styleClass="Container80 Fnone MarAuto Fs18"/>
+		                <div class="EmptyBox10"></div>	                  
+	                    <p:inputText  placeholder="#{msgs['label.login.userId']}" requiredMessage="#{msgs['label.login.userId']} #{msgs['label.required']}" required="true"  maxlength="30" value="#{signupBean.account.userName}" styleClass="Container80 Fnone MarAuto Fs18"/>
+		                <div class="EmptyBox10"></div>	                  
+	                    <p:password placeholder="#{msgs['label.login.password']}" requiredMessage="#{msgs['label.login.password']} #{msgs['label.required']}" required="true"  maxlength="16" value="#{signupBean.password}" styleClass="Container80 Fnone MarAuto Fs18"/>
+	                    <div class="EmptyBox20"></div>
+              			<p:commandButton value="#{msgs['label.login.accessrequest']}" action="#{signupBean.signup}" styleClass="Fs16" onclick="PF('uiblocker').show();" oncomplete="PF('uiblocker').hide();" onerror="PF('uiblocker').hide();" />
+	                    <div class="EmptyBox50"></div>
+	                </div>
+	             </h:form>
+            </div>
+        </div>
+    </div>
+    <!-- LOGIN BOX COVER END -->
+ 	 		<p:dialog  showEffect="fade" hideEffect="fade" modal="true" resizable="false"
+		       		     widgetVar="uiblocker" showHeader="false" closeable="false">  
+				<h:panelGroup layout="block" >
+			 		<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</h:panelGroup>
+		   	</p:dialog>  						
+    
+</h:body>
+
+</html>

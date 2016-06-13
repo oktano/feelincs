@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13898903127660" configfile="/crowdfunding-web/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="secure/login.xhtml" x="122" y="178" id="pf13906832391500" referenceLink="//@navigationRule.0/@fromViewId|" path="/secure/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="secure/content/updateProfile.xhtml" x="122" y="562" id="pf13906832391512" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/secure/content/updateProfile.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="secure/signin.xhtml" x="122" y="946" id="pf13979344178080" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13979344178081" path="/secure/signin.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="338" y="946" id="pf13979344178082" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13979344178081" path="/home.xhtml"/>
+  <links id="pf13979344178081" target="pf13979344178082" source="pf13979344178080"/>
+</pageflow:Pageflow>

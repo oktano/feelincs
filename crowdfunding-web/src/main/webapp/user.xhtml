@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+       <div class="ContainerIndent">
+            <p:panel>
+                <div class="ContainerIndent">
+        
+			        <h3 class="hardblue TexAlCenter">User List</h3>
+			 
+						<h:form prependId="false">	
+							<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 						
+							<p:growl autoUpdate="true"/>
+				
+							   <p:dataTable  id="tableId" widgetVar="tableT" var="account" value="#{accountListBean.accountList}" rows="10"
+						                         paginator="true"
+						                         paginatorPosition="bottom"
+						                         rowsPerPageTemplate="10,20,25" 
+						                         filteredValue="#{accountListBean.filteredAccountList}"					                         
+						                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+								
+								<f:facet name="header">
+									<h:panelGroup layout="block pull-left"  >
+					        
+					               	 	<p:inputText id="globalFilter"  style="width:500px;" onkeyup="PF('tableT').filter()"   placeholder="Search"/>
+										<span class="input-group-addon">
+											<i class="fa fa-search"></i>
+										</span>
+									</h:panelGroup>
+
+								</f:facet>
+					
+									       					 
+						        <p:column  filterStyle="display:none" style="width:25%;" filterBy="#{account.firstName}"  filterMatchMode="exact"  headerText="#{msgs['label.login.firstname']}">
+									<h:outputText value="#{account.firstName}" />
+					  			</p:column>
+						 
+						        <p:column  filterStyle="display:none" style="width:25%;" filterBy="#{account.lastName}"  filterMatchMode="exact"  headerText="#{msgs['label.login.lastname']}">
+									<h:outputText value="#{account.lastName}" />
+					  			</p:column>
+
+						        <p:column  filterStyle="display:none" style="width:25%;" filterBy="#{account.userName}"  filterMatchMode="exact"  headerText="#{msgs['label.login.userId']}">
+									<h:outputText value="#{account.userName}" />
+					  			</p:column>
+	
+						        <p:column   style="width:15%;"  headerText="#{msgs['label.common.status']}">
+									<h:outputText value="#{account.accountStatus.isAccountEnabled() eq true ? 'Active':'Not Active'}" />
+					  			</p:column>
+
+						        <p:column style="width:10%;" headerText="Action">
+                                <div class="btn-group btn-group-xs">
+									  <p:commandLink rendered="#{account.accountStatus.isAccountEnabled() eq false}" title="Activate"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  styleClass="btn btn-xs btn-danger" actionListener="#{accountListBean.activate(account)}">			                       
+		                               	      <i class="fa fa-check-square"/>
+									  </p:commandLink>
+
+									  <p:commandLink rendered="#{account.accountStatus.isAccountEnabled() eq true}" title="Deactivate"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  styleClass="btn btn-xs btn-danger" actionListener="#{accountListBean.deactivate(account)}">			                       
+		                               	      <i class="fa fa-times"/>
+									  </p:commandLink>
+                                </div>
+ 
+ 					        </p:column>
+	
+
+						    </p:dataTable>	
+						 </h:form>    
+					 </div>
+				</p:panel>
+			</div>               	                   	
+ 	 		<p:dialog  showEffect="fade" hideEffect="fade" modal="true" resizable="false"
+		       		     widgetVar="uiblocker" showHeader="false" closeable="false">  
+				<h:panelGroup layout="block" >
+			 		<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</h:panelGroup>
+		   	</p:dialog>  						
+ 
+    </ui:define>
+
+</ui:composition>
