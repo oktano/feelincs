@@ -7,17 +7,25 @@
 
     <ui:define name="content">
         <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
-           
-		<h:form prependId="false">	
-			<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 						
-             <p:growl autoUpdate="true"/> 
-             <p:panel style="min-height:800px;">
-       		  		<div class="Container100"> 
-                     
-  					</div>
-             </p:panel>
-        
-   		   </h:form>
+     	 <div class="Container100">
+            <p:panel>
+                <div class="ContainerIndent">
+            		 <h3 class="hardblue TexAlCenter"><h:outputText value="#{msgs['label.createdevelopment.title.screen1.title']}" /></h3>
+            
+					<h:form prependId="false">	
+						<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 	
+											
+							 <div class="Container50">
+							     
+							     <p:panelGrid columns="1">
+							     	<h:outputText value="#{msgs['label.createdevelopment.companyname']}" />
+							     </p:panelGrid>
+							 </div>					
+			             <p:growl autoUpdate="true"/> 
+				   	</h:form>
+				</div>
+			 </p:panel>
+		 </div>
    		      
     </ui:define>
 

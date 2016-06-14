@@ -1,12 +1,10 @@
 package com.reactiveiq.crowdfunding.domain;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,10 +13,10 @@ public class LookupData extends BaseEntity{
 
 	private LookupDataType lookupDataType;
 	
+	private String name;
+	
 	private String language;
 	
-	private List<LocaleValue>localeValueList;
-
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="DATA_TYPE_ID")	
@@ -30,6 +28,17 @@ public class LookupData extends BaseEntity{
 		this.lookupDataType = lookupDataType;
 	}
 
+	
+	@Column(name="NAME")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name="LANG_CODE")
 	public String getLanguage() {
 		return language;
 	}
@@ -38,13 +47,5 @@ public class LookupData extends BaseEntity{
 		this.language = language;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="lookupData")	
-	public List<LocaleValue> getLocaleValueList() {
-		return localeValueList;
-	}
-
-	public void setLocaleValueList(List<LocaleValue> localeValueList) {
-		this.localeValueList = localeValueList;
-	}
 	
 }

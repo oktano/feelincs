@@ -13,26 +13,27 @@ import javax.persistence.Table;
 @Table(name="LOOKUP_DATA_TYPE")
 public class LookupDataType  extends BaseEntity{
 
-	private String type;
+	private String name;
 	
+
 	private List<LookupData>lookupDataList;
-
-	@Column(name="TYPE")
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
+	
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="lookupDataType")	
 	public List<LookupData> getLookupDataList() {
 		return lookupDataList;
 	}
 
+	@Column(name="NAME")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void setLookupDataList(List<LookupData> lookupDataList) {
 		this.lookupDataList = lookupDataList;
 	}
-
+dcmf-
 }

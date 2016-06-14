@@ -25,12 +25,11 @@ public class PropertyEntryBean implements Serializable {
 	@Inject 
 	private transient PropertyService propertyService;
 
-	private Property property = new Property();
 	
 	public void save(){
 		
 		try {
-			propertyService.save(property);
+			//propertyService.save(property);
 			FacesMessage facesMessage=MessageUtilBean.getFacesMessage("label.updated",FacesMessage.SEVERITY_INFO );
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 
@@ -43,12 +42,5 @@ public class PropertyEntryBean implements Serializable {
 		
 	}
 
-	public Property getProperty() {
-		return property;
-	}
-
-	public void setProperty(Property property) {
-		this.property = property;
-	}
 	
 }

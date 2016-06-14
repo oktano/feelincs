@@ -5,15 +5,19 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PROPERTY")
-public class Property  extends BaseEntity{
+@Table(name="DEVELOPMENT")
+public class Development  extends BaseEntity{
 
+	private Company company;
+	
 	private String description;
 	
 	private Address address;	
@@ -23,6 +27,16 @@ public class Property  extends BaseEntity{
 	private List<Document>documents;
 	
 	private float sponsorEquitySharePercentage;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="COMPANY_ID")		
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company= company;
+	}
 
 	public String getDescription() {
 		return description;
