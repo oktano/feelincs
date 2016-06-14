@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+     	 <div class="Container100">
+            <p:panel>
+                <div class="ContainerIndent">
+            		 <h3 class="hardblue TexAlCenter"><h:outputText value="#{msgs['label.createdevelopment.companyprofile.title']}" /></h3>
+            
+					<h:form prependId="false">	
+							<p:growl autoUpdate="true"/> 
+						
+						<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 	
+											
+							 <div class="Container50">
+							     
+							     <p:panelGrid columns="1">
+							     	<h:outputLabel for="companyName" value="#{msgs['label.createdevelopment.companyname']}" />
+							     	<p:inputText id="companyName"  value="#{createNewDevelopmentBean.development.company.companyName}" required="true" requiredMessage="#{msgs['label.createdevelopment.companyname']} #{msgs['label.required']}"></p:inputText>
+							     </p:panelGrid>
+							     <p:commandButton value="#{msgs['label.common.save']}" action="#{createNewDevelopmentBean.save()}" styleClass="Fs16" update="@form" onclick="PF('uiblocker').show();" oncomplete="PF('uiblocker').hide();" onerror="PF('uiblocker').hide();" />
+							     
+							 </div>					
+			             
+				   	</h:form>
+				</div>
+			 </p:panel>
+		 </div>
+   		  
+   		  <p:dialog  showEffect="fade" hideEffect="fade" modal="true" resizable="false"
+		       		     widgetVar="uiblocker" showHeader="false" closeable="false">  
+				<h:panelGroup layout="block" >
+			 		<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</h:panelGroup>
+		   	</p:dialog>  						
+        
+    </ui:define>
+
+</ui:composition>

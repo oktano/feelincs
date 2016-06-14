@@ -35,5 +35,4 @@ public class LookupDataType  extends BaseEntity{
 	public void setLookupDataList(List<LookupData> lookupDataList) {
 		this.lookupDataList = lookupDataList;
 	}
-dcmf-
 }

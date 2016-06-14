@@ -4,7 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -15,9 +15,7 @@ public class Document extends BaseEntity {
 	
 	private String fileName;
 	
-	private LookupData documentType;
-
-	private Property property;
+	private Development development;
 	
 
 	@Column(name="FILE_NAME",length=100)
@@ -29,25 +27,14 @@ public class Document extends BaseEntity {
 		this.fileName = fileName;
 	}
 
-
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="DOCUMENT_TYPE_ID")	
-	public LookupData getDocumentType() {
-		return documentType;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="DEVELOPMENT_ID")		
+	public Development getDevelopment() {
+		return development;
 	}
 
-	public void setDocumentType(LookupData documentType) {
-		this.documentType = documentType;
-	}
-
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="PROPERTY_ID")		
-	public Property getProperty() {
-		return property;
-	}
-
-	public void setProperty(Property property) {
-		this.property = property;
+	public void setDevelopment(Development development) {
+		this.development = development;
 	}
 
 	
