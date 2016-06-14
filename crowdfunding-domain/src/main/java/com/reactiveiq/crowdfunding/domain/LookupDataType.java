@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="DOCUMENT")
+@Table(name="LOOKUP_DATA_TYPE")
 public class LookupDataType  extends BaseEntity{
 
 	private String type;
