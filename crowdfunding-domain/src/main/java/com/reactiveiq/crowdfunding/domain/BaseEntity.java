@@ -14,7 +14,7 @@ public class BaseEntity {
 	
 	private Long version;
 
-	private boolean active=true;
+	private boolean deleted=true;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -38,13 +38,13 @@ public class BaseEntity {
 		this.version = version;
 	}
 
-	@Column(name="STATUS")
-	public boolean isActive() {
-		return active;
+	@Column(name="IS_DELETED")
+	public boolean isDeleted() {
+		return deleted;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 }
