@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+           
+		<h:form prependId="false" enctype="multipart/form-data" id="mf">	
+			<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 						
+             <p:growl autoUpdate="true"/> 
+            <p:panel style="min-height:800px;">
+               <h:panelGroup layout="block" styleClass="Container">
+                    <h:panelGroup layout="block" styleClass="Container100">
+                        <h:panelGroup layout="block" styleClass="ContainerIndent"><h:outputText value="#{editLookupDataBean.selectedLookupData.id eq null? 'Add':'Edit'} #{manageLookupDataListBean.selectedLookupDataType.displayValue}" styleClass="FontBold Fs18 hardblue"></h:outputText></h:panelGroup>
+					</h:panelGroup>
+                    <h:panelGroup layout="block" styleClass="Container50">
+                        <p:panelGrid columns="2"  columnClass="ui-grid-col-4 ui-grid-col-6" styleClass="ui-panelgrid-blank" layout="grid">
+                          	<p:outputLabel value="#{msgs['label.lookupdata.name']}" for="category" />
+			  	  			<p:inputText  maxlength="30" id="category" style="width:95%;" value="#{editLookupDataBean.selectedLookupData.value}" required="true" requiredMessage="#{msgs['label.lookupdata.name']} #{msgs['label.required']}" />
+			
+                          	<p:outputLabel value="#{msgs['label.common.description']}" for="description" />
+			  	  			<p:inputTextarea maxlength="4000" rows="5"  columns="40" id="description" style="width:95%;" value="#{editLookupDataBean.selectedLookupData.description}"   required="true" requiredMessage="#{msgs['label.common.description']} #{msgs['label.required']}"/>
+
+                          	<p:outputLabel value="#{msgs['label.common.language']}" for="language" />
+			  	  		
+			  	  			<p:selectOneMenu style="width:90%;" id="language" value="#{editLookupDataBean.selectedLookupData.language}" >
+			  	  				<f:selectItem  itemValue="en" itemLabel="English"/>
+			  	  				<f:selectItem  itemValue="tr" itemLabel="Türkçe"/>
+			  	  			</p:selectOneMenu>	      
+			  	  		</p:panelGrid>                             
+                  </h:panelGroup>
+                   <h:panelGroup layout="block" styleClass="Container100"/>
+                    <h:panelGroup layout="block" styleClass="Container50">
+                        <h:panelGroup layout="block" styleClass="ContainerIndent">
+							 <p:commandButton  value="#{msgs['label.common.save']}"  styleClass="pull-right"  actionListener="#{editLookupDataBean.save()}" onclick="PF('uiblocker').show();" oncomplete="PF('uiblocker').hide();" onerror="PF('uiblocker').hide();" />
+							 <p:commandButton  value="#{msgs['label.common.cancel']}"  styleClass="pull-right"  actionListener="#{editLookupDataBean.cancel}"  onclick="PF('uiblocker').show();" oncomplete="PF('uiblocker').hide();" onerror="PF('uiblocker').hide();" />
+                        </h:panelGroup>
+					
+					</h:panelGroup>
+                   
+                </h:panelGroup>
+            </p:panel>
+        
+   		   </h:form>
+     	 	<p:dialog  showEffect="fade" hideEffect="fade" modal="true" resizable="false"
+		       		     widgetVar="uiblocker" showHeader="false" closeable="false">  
+				<h:panelGroup layout="block" >
+			 		<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</h:panelGroup>
+		   	</p:dialog>  						
+ 
+    </ui:define>
+
+</ui:composition>

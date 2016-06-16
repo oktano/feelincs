@@ -65,7 +65,7 @@ public class Development  extends BaseEntity{
 		this.price = price;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="property")	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="development")	
 	public List<Document> getDocuments() {
 		return documents;
 	}

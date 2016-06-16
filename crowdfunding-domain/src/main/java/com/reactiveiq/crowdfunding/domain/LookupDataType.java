@@ -15,6 +15,11 @@ public class LookupDataType  extends BaseEntity{
 
 	private String name;
 	
+	private String displayValue;
+	
+	private boolean hasImage;
+	
+	private boolean hasType;
 
 	private List<LookupData>lookupDataList;
 	
@@ -22,6 +27,11 @@ public class LookupDataType  extends BaseEntity{
 	public List<LookupData> getLookupDataList() {
 		return lookupDataList;
 	}
+
+	public void setLookupDataList(List<LookupData> lookupDataList) {
+		this.lookupDataList = lookupDataList;
+	}
+	
 
 	@Column(name="NAME")
 	public String getName() {
@@ -32,7 +42,31 @@ public class LookupDataType  extends BaseEntity{
 		this.name = name;
 	}
 
-	public void setLookupDataList(List<LookupData> lookupDataList) {
-		this.lookupDataList = lookupDataList;
+	@Column(name="DISPLAY_VALUE")
+	public String getDisplayValue() {
+		return displayValue;
 	}
+
+	public void setDisplayValue(String displayValue) {
+		this.displayValue = displayValue;
+	}
+
+	@Column(name="HAS_IMAGE")
+	public boolean isHasImage() {
+		return hasImage;
+	}
+
+	public void setHasImage(boolean hasImage) {
+		this.hasImage = hasImage;
+	}
+	@Column(name="HAS_TYPE")
+	public boolean isHasType() {
+		return hasType;
+	}
+
+	public void setHasType(boolean hasType) {
+		this.hasType = hasType;
+	}
+	
+	
 }

@@ -1,13 +1,25 @@
 package com.reactiveiq.crowdfunding.service.impl;
 
+import javax.inject.Singleton;
+import javax.transaction.Transactional;
+
 import com.reactiveiq.crowdfunding.domain.Development;
+import com.reactiveiq.crowdfunding.service.BaseService;
 import com.reactiveiq.crowdfunding.service.DevelopmentService;
 
-public class DevelopmentServiceImpl implements DevelopmentService{
+@Singleton
+@Transactional
+public class DevelopmentServiceImpl  extends BaseService implements DevelopmentService{
 
 	@Override
-	public void save(Development t) {
-		// TODO Auto-generated method stub
+	public void save(Development entity) {
+		if(entity.getId()==null){
+			getEntityManager().persist(entity);
+		}
+		else {
+			getEntityManager().merge(entity);
+			
+		}
 		
 	}
 

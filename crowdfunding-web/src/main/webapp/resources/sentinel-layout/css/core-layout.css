@@ -366,3 +366,11 @@ input[type="text"], input[type="password"], textarea{ -webkit-appearance: none; 
 .Container:after {
     clear: both; 
 }
+
+.panel_grid_40percen{
+	width:40%;
+}
+
+.panel_grid_40percen{
+	width:40%;
+}

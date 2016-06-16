@@ -15,7 +15,7 @@ import com.reactiveiq.crowdfunding.domain.Role;
 import com.reactiveiq.crowdfunding.domain.UserRole;
 import com.reactiveiq.crowdfunding.service.AccountSearchDto;
 import com.reactiveiq.crowdfunding.service.AccountService;
-import com.reactiveiq.crowdfunding.service.BaseBean;
+import com.reactiveiq.crowdfunding.service.BaseService;
 import com.reactiveiq.crowdfunding.service.ReferenceDataService;
 import com.reactiveiq.crowdfunding.service.ServiceConstants;
 import com.reactiveiq.crowdfunding.service.validation.AccountCreationValidation;
@@ -23,7 +23,7 @@ import com.reactiveiq.crowdfunding.service.validation.AccountCreationValidation;
 
 @Singleton
 @Transactional
-public class AccountServiceBean extends BaseBean implements AccountService{
+public class AccountServiceBean extends BaseService implements AccountService{
 	
 	@Inject
 	private AccountCreationValidation accountCreationValidation;

@@ -1,11 +1,13 @@
 package com.reactiveiq.crowdfunding.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="LOOKUP_DATA")
@@ -13,12 +15,19 @@ public class LookupData extends BaseEntity{
 
 	private LookupDataType lookupDataType;
 	
-	private String name;
+	private String value;
 	
 	private String language;
+
+	private String imageFile;
 	
+	private String type;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	private String description;
+
+	
+	@ManyToOne
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name="DATA_TYPE_ID")	
 	public LookupDataType getLookupDataType() {
 		return lookupDataType;
@@ -29,16 +38,16 @@ public class LookupData extends BaseEntity{
 	}
 
 	
-	@Column(name="NAME")
-	public String getName() {
-		return name;
+	@Column(name="VALUE")
+	public String getValue() {
+		return value;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
-	@Column(name="LANG_CODE")
+	@Column(name="LANGUAGE")
 	public String getLanguage() {
 		return language;
 	}
@@ -47,5 +56,33 @@ public class LookupData extends BaseEntity{
 		this.language = language;
 	}
 
+	@Column(name="IMAGE_FILE")
+	public String getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
+	}
+
+	@Column(name="TYPE")
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Column(name="DESCRIPTION")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 	
 }

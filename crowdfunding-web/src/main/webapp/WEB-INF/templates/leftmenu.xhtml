@@ -23,6 +23,22 @@
             <ps:menu id="sm_leftmenu">
                 <p:menuitem id="sm_dashboard" value="#{msgs['label.menu.left.dashboard']}" icon="icon-home-outline" outcome="dashboard" containerStyleClass="layout-menubar-active"/>
              	<p:menuitem id="sm_development" value="#{msgs['label.menu.left.newdevelopment']}" icon="icon-home-outline" outcome="/development/newdevelopment" containerStyleClass="layout-menubar-active"/>
+   
+               	<p:submenu label="#{msgs['label.menu.left.managedropdown.title']}" icon="icon-tasks">
+            		<p:menuitem  value="#{msgs['label.managedropdown.companycategory']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=COMPANY_CATEGORY" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.companyindustry']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=COMPANY_INDUSTRY" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.fundingsource']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=FUNDING_SOURCE" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.fundingtype']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=FUNDING_TYPE" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.documenttype']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=DOCUMENT_TYPE" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.accounttype']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=ACCOUNT_TYPE" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.teammembertype']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=TEAM_MEMBER_TYPE" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.investortype']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=INVESTOR_TYPE" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.developmentcategories']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=DEVELOPMENT_CATEGORIES" containerStyleClass="layout-menubar-active"/>
+            		<p:menuitem  value="#{msgs['label.managedropdown.developmentphases']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=DEVELOPMENT_PHASES" containerStyleClass="layout-menubar-active"/>
+  
+               	</p:submenu>
+             
+             
              </ps:menu>
         </h:form>
       

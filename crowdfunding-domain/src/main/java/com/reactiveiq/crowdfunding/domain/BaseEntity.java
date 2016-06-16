@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 @MappedSuperclass()
@@ -14,7 +15,8 @@ public class BaseEntity {
 	
 	private Long version;
 
-	private boolean deleted=true;
+	private boolean deleted=false;
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -45,6 +47,11 @@ public class BaseEntity {
 
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	@Transient
+	public boolean isActive() {
+		return !deleted;
 	}
 	
 }

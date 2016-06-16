@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+           
+		<h:form prependId="false"  id="mf">	
+			<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 						
+             <p:growl autoUpdate="true"/> 
+            <p:panel style="min-height:800px;">
+               <h:panelGroup layout="block" styleClass="Container">
+                    <h:panelGroup layout="block" styleClass="Container100">
+                        <h:panelGroup layout="block" styleClass="ContainerIndent">
+                        <h:outputText value="#{manageLookupDataListBean.selectedLookupDataType.displayValue}" styleClass="FontBold Fs18 hardblue">
+                    </h:outputText></h:panelGroup>
+					</h:panelGroup>
+
+                     <h:panelGroup layout="block" styleClass="Container100">                      
+                    	 <p:dataTable    scrollable="true"  id="tableId" widgetVar="tableT" var="lookupData" value="#{manageLookupDataListBean.lookupDataList}" rows="25"
+				                         paginator="true"
+				                         paginatorPosition="bottom"
+				                         rowsPerPageTemplate="25,30" 		
+				                         filteredValue="#{manageLookupDataListBean.filteredLookupDataList}"					                         			                         		                         
+				                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+						
+								<f:facet name="header">
+									<h:panelGroup layout="block pull-right"  >
+					        
+					               	 	<p:inputText id="globalFilter"   style="width:90%;"  onkeyup="PF('tableT').filter()"   placeholder="Filter"/>
+									</h:panelGroup>
+
+								</f:facet>
+								<f:facet name="footer">
+								  	<p:button outcome="lookupdataedit" value="Add New" >
+	                               		<f:param name="type" value="#{manageLookupDataListBean.selectedLookupDataType.name}"/>
+									</p:button>
+ 								</f:facet>
+								
+							   
+							    <p:column style="width:300px;"   filterBy="#{lookupData.value}"   filterStyle="display:none"  filterMatchMode="contains" headerText="#{manageLookupDataListBean.selectedLookupDataType.displayValue}">
+							    	<h:outputText value="#{lookupData.value}" />
+								</p:column>	
+										
+
+							    <p:column style="width:200px;" headerText="#{msgs['label.common.status']}">
+							    	<h:outputText value="#{lookupData.isActive() eq false?'Inactive':'Active'}" />
+								</p:column>	
+										
+							    <p:column style="width:100px;"  headerText="#{msgs['label.common.action']}">
+					               	<p:commandLink  rendered="#{lookupData.isActive() eq true}" actionListener="#{manageLookupDataListBean.changeStatus(lookupData)}" onclick="PF('uiblocker').show();"  update="@form" onerror="PF('uiblocker').show();"  oncomplete="PF('uiblocker').hide();"  title="#{msgs['label.common.action']}">
+										<i class="fa fa-trash"/>
+					                </p:commandLink>
+					               	<p:commandLink  rendered="#{lookupData.isActive() eq false}" actionListener="#{manageLookupDataListBean.changeStatus(lookupData)}" onclick="PF('uiblocker').show();"  update="@form" onerror="PF('uiblocker').show();"  oncomplete="PF('uiblocker').hide();"  title="#{msgs['label.common.action']}">
+										<i class="fa fa-check-square"/>
+					                </p:commandLink>
+
+                                   <h:outputLink value="#{request.contextPath}/lookupdataedit.html" styleClass="btn btn-default">
+	                               			<i class="fa fa-pencil"/>
+	                               			<f:param name="type" value="#{manageLookupDataListBean.selectedLookupDataType.name}"/>
+	                               			<f:param name="id" value="#{lookupData.id}"/>
+                               		</h:outputLink>
+					                
+ 								</p:column>
+	
+							</p:dataTable>
+						
+					   </h:panelGroup>
+                      
+                 	</h:panelGroup>
+            </p:panel>
+        
+   		   </h:form>
+     	 	<p:dialog  showEffect="fade" hideEffect="fade" modal="true" resizable="false"
+		       		     widgetVar="uiblocker" showHeader="false" closeable="false">  
+				<h:panelGroup layout="block" >
+			 		<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</h:panelGroup>
+		   	</p:dialog>  						
+ 
+    </ui:define>
+
+</ui:composition>

@@ -11,8 +11,6 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.reactiveiq.crowdfunding.domain.Property;
-import com.reactiveiq.crowdfunding.service.PropertyService;
 import com.reactiveiq.crowdfunding.web.utils.MessageUtilBean;
 
 @ViewScoped
@@ -23,7 +21,7 @@ public class PropertyEntryBean implements Serializable {
 	
 	
 	@Inject 
-	private transient PropertyService propertyService;
+	//private transient PropertyService propertyService;
 
 	
 	public void save(){
