@@ -36,7 +36,9 @@
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
-					<warName>crowdfunding-web-${project.version}</warName>
+					<!--<warName>crowdfunding-web-${project.version}</warName>-->
+					<warName>ROOT</warName>
+					
 				<webResources>
 					   <resource>
 					    <directory>${project.basedir}/src/main/resources/lib/</directory>
