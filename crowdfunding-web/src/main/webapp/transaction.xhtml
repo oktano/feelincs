@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+           
+		<h:form prependId="false"  id="mf">	
+			<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 						
+             <p:growl autoUpdate="true"/> 
+            <p:panel style="min-height:800px;">
+               <h:panelGroup layout="block" styleClass="Container">
+                    <h:panelGroup layout="block" styleClass="Container100">
+                        <h:panelGroup layout="block" styleClass="ContainerIndent">
+                        <h:outputText value="#{msgs['label.transaction.title']}" styleClass="FontBold Fs18 hardblue">
+                    </h:outputText></h:panelGroup>
+					</h:panelGroup>
+
+                     <h:panelGroup layout="block" styleClass="Container100">                      
+                    	 <p:dataTable    scrollable="true"  id="tableId" widgetVar="tableT" var="transaction" value="#{transactionListBean.transactionList}" rows="25"
+				                         paginator="true"
+				                         paginatorPosition="bottom"
+				                         rowsPerPageTemplate="25,30" 		
+				                         filteredValue="#{transactionListBean.filteredTransactionList}"					                         			                         		                         
+				                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+						
+								<f:facet name="header">
+									<h:panelGroup layout="block pull-right"  >
+					        
+					               	 	<p:inputText id="globalFilter"   style="width:90%;"  onkeyup="PF('tableT').filter()"   placeholder="Filter"/>
+									</h:panelGroup>
+
+								</f:facet>
+							   
+							    <p:column style="width:320px;"   filterBy="#{transaction.development.name}"   filterStyle="display:none"  filterMatchMode="contains" headerText="#{msgs['label.transaction.development']}">
+							    	<h:outputText value="#{transaction.development.name}" />
+								</p:column>	
+										
+
+							    <p:column style="width:200px;"   filterBy="#{transaction.investor.getFullName()}"   filterStyle="display:none"  filterMatchMode="contains" headerText="#{msgs['label.transaction.investor']}">
+							    	<h:outputText value="#{transaction.investor.getFullName()}" />
+								</p:column>	
+
+
+							    <p:column style="width:200px;"   filterBy="#{transaction.invesmentAmount}"   filterStyle="display:none"  filterMatchMode="contains" headerText="#{msgs['label.transaction.amount']}">
+							    	<h:outputText value="#{transaction.invesmentAmount}" />
+								</p:column>	
+
+							    <p:column style="width:200px;"   filterBy="#{transaction.currency}"   filterStyle="display:none"  filterMatchMode="contains" headerText="#{msgs['label.transaction.currency']}">
+							    	<h:outputText value="#{transaction.currency}" />
+								</p:column>	
+
+							    <p:column style="width:200px;"   filterBy="#{transaction.dateJoined}"   filterStyle="display:none"  filterMatchMode="contains" headerText="#{msgs['label.transaction.date']}">
+							    	<h:outputText value="#{transaction.dateJoined}">
+										  <f:convertDateTime pattern="d-M-yyyy HH:mm" />									
+							    	</h:outputText>
+								</p:column>	
+									
+							    <p:column style="width:200px;"   filterBy="#{transaction.status}"   filterStyle="display:none"  filterMatchMode="contains" headerText="#{msgs['label.transaction.status']}">
+							    	<h:outputText value="New" rendered="#{transaction.status eq null}"/>
+							    	<h:outputText value="Approved" rendered="#{transaction.status eq true}"/>
+							    	<h:outputText value="Rejected" rendered="#{transaction.status eq false}"/>
+								</p:column>	
+
+							    <p:column style="width:100px;"  headerText="#{msgs['label.common.action']}">
+	                               <div class="btn-group btn-group-xs">
+										  <p:commandLink rendered="#{transaction.status eq null }" title="Approve"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  styleClass="btn btn-xs btn-danger" actionListener="#{transactionListBean.approve(transaction)}">			                       
+			                               	      <i class="fa fa-check-square"/>
+										  </p:commandLink>
+	
+										  <p:commandLink rendered="#{transaction.status eq null }" title="Reject"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  styleClass="btn btn-xs btn-danger" actionListener="#{transactionListBean.reject(transaction)}">			                       
+			                               	      <i class="fa fa-check-square"/>
+										  </p:commandLink>
+	                                </div>
+
+ 								</p:column>
+	
+							</p:dataTable>
+						
+					   </h:panelGroup>
+                      
+                 	</h:panelGroup>
+            </p:panel>
+        
+   		   </h:form>
+     	 	<p:dialog  showEffect="fade" hideEffect="fade" modal="true" resizable="false"
+		       		     widgetVar="uiblocker" showHeader="false" closeable="false">  
+				<h:panelGroup layout="block" >
+			 		<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</h:panelGroup>
+		   	</p:dialog>  						
+ 
+    </ui:define>
+
+</ui:composition>

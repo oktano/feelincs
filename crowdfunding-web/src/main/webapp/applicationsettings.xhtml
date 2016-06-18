@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+           
+		<h:form prependId="false" enctype="multipart/form-data" id="mf">	
+			<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 						
+             <p:growl autoUpdate="true"/> 
+            <p:panel style="min-height:800px;">
+               <h:panelGroup layout="block" styleClass="Container">
+                    <h:panelGroup layout="block" styleClass="Container100">
+                        <h:panelGroup layout="block" styleClass="ContainerIndent"><h:outputText value="#{msgs['label.applicationsettings.title']}" styleClass="FontBold Fs18 hardblue"></h:outputText></h:panelGroup>
+					</h:panelGroup>
+
+                     <h:panelGroup layout="block" styleClass="Container100">                      
+                    	 <p:dataTable    scrollable="true"  id="tableId" widgetVar="tableT" var="appSetting" value="#{applicationSettingsBean.applicationSettingsList}" rows="50"
+				                         editable="true"
+				                         rowsPerPageTemplate="50,75">
+						
+							   
+						       <p:ajax event="rowEdit" listener="#{applicationSettingsBean.onRowEdit}" update= "tableId"/>
+						 							    
+							    <p:column style="width:400px;"  headerText="#{msgs['label.applicationsettings.key']}" >
+									<h:outputText value="#{appSetting.key}" />					  			
+								</p:column>	
+										
+							    <p:column   headerText="#{msgs['label.applicationsettings.value']}">
+						          <p:cellEditor>
+					               	  <f:facet name="output"><h:outputText value="#{appSetting.value}" /></f:facet>
+					               	  <f:facet name="input">
+					               	  	<p:inputText value="#{appSetting.value}" maxlength="50" required="true" requiredMessage="#{msgs['label.applicationsettings.value']} #{msgs['label.required']}" style="width:100%" />
+					               	  </f:facet>
+					               </p:cellEditor>
+								</p:column>	
+							      <p:column style="width:32px">
+							           <p:rowEditor />
+							       </p:column>
+ 										
+	
+								</p:dataTable>
+						
+					   </h:panelGroup>
+                      
+                 	</h:panelGroup>
+            </p:panel>
+        
+   		   </h:form>
+     	 	<p:dialog  showEffect="fade" hideEffect="fade" modal="true" resizable="false"
+		       		     widgetVar="uiblocker" showHeader="false" closeable="false">  
+				<h:panelGroup layout="block" >
+			 		<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</h:panelGroup>
+		   	</p:dialog>  						
+ 
+    </ui:define>
+
+</ui:composition>
