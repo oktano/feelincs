@@ -17,6 +17,8 @@
  	  <class>com.reactiveiq.crowdfunding.domain.Development</class>
  	  <class>com.reactiveiq.crowdfunding.domain.Company</class>
  	  <class>com.reactiveiq.crowdfunding.domain.Document</class> 	  	
+ 	  <class>com.reactiveiq.crowdfunding.domain.ApplicationSetting</class> 	 
+ 	  <class>com.reactiveiq.crowdfunding.domain.Transaction</class> 	 
        <exclude-unlisted-classes>false</exclude-unlisted-classes>
        <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>

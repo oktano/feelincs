@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+           
+		<h:form prependId="false"  id="mf">	
+			<input type="hidden" name="#{_csrf.parameterName}"  value="#{_csrf.token}"/> 						
+             <p:growl autoUpdate="true"/> 
+            <p:panel style="min-height:800px;">
+               <h:panelGroup layout="block" styleClass="Container">
+                    <h:panelGroup layout="block" styleClass="Container100">
+                        <h:panelGroup layout="block" styleClass="ContainerIndent">
+                        <h:outputText value="Development List" styleClass="FontBold Fs18 hardblue">
+                    </h:outputText></h:panelGroup>
+					</h:panelGroup>
+
+                     <h:panelGroup layout="block" styleClass="Container100">                      
+                    	 <p:dataTable    scrollable="true"  id="tableId" widgetVar="tableT" var="development" value="#{developmentListBean.developmentList}" rows="25"
+				                         paginator="true"
+				                         paginatorPosition="bottom"
+				                         rowsPerPageTemplate="25,30" 		
+				                         filteredValue="#{developmentListBean.filteredDevelopmentList}"					                         			                         		                         
+				                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+						
+								<f:facet name="header">
+									<h:panelGroup layout="block pull-right"  >
+					        
+					               	 	<p:inputText id="globalFilter"   style="width:90%;"  onkeyup="PF('tableT').filter()"   placeholder="Filter"/>
+									</h:panelGroup>
+
+								</f:facet>
+							   
+							    <p:column style="width:200px;"   filterBy="#{development.name}"   filterStyle="display:none"  filterMatchMode="contains" headerText="Company">
+									 <p:commandLink title="View"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  >			                       							
+								    	<h:outputText value="#{development.name}" />
+								    </p:commandLink>
+								</p:column>	
+										
+
+							    <p:column style="width:200px;"   filterBy="#{development.dealType}"   filterStyle="display:none"  filterMatchMode="contains" headerText="Deal Type">
+							    	<h:outputText value="#{development.dealType}" />
+								</p:column>	
+
+							    <p:column style="width:200px;"   filterBy="#{development.createdBy.getFullName()}"   filterStyle="display:none"  filterMatchMode="contains" headerText="Created By">
+							    	<h:outputText value="#{development.createdBy.getFullName()}" />
+								</p:column>	
+
+
+							    <p:column style="width:200px;"   filterBy="#{development.totalInvestor}"   filterStyle="display:none"  filterMatchMode="contains" headerText="Investors">
+							    	<h:outputText value="#{development.totalInvestor}" />
+								</p:column>	
+
+							    <p:column style="width:200px;"   filterBy="#{development.status}"   filterStyle="display:none"  filterMatchMode="contains" headerText="Status">
+							    	<h:outputText value="#{development.status}" />
+								</p:column>	
+
+	
+							    <p:column style="width:200px;"  headerText="#{msgs['label.common.action']}">
+	                               <div class="btn-group btn-group-sm">
+										  <p:commandLink title="View"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  styleClass="btn btn-sm btn-default" >			                       
+			                               	      <i class="fa fa-eye fa-2x"/>
+										  </p:commandLink>
+
+										  <p:commandLink title="Send Message"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  styleClass="btn btn-sm btn-default" >			                       
+			                               	      <i class="fa fa-envelope fa-2x"/>
+										  </p:commandLink>
+										  <p:commandLink title="Delete"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  styleClass="btn btn-sm btn-danger" >			                       
+			                               	      <i class="fa fa-trash fa-2x"/>
+										  </p:commandLink>
+										  <p:commandLink title="Aprove"  onerror="PF('uiblocker').hide();"   process="@this" oncomplete="PF('uiblocker').hide();"  onstart="PF('uiblocker').show();" update="@form"  styleClass="btn btn-sm btn-success" >			                       
+			                               	      <i class="fa fa-check-square fa-2x"/>
+										  </p:commandLink>
+
+
+	                                </div>
+
+ 								</p:column>
+	
+							</p:dataTable>
+						
+					   </h:panelGroup>
+                      
+                 	</h:panelGroup>
+            </p:panel>
+        
+   		   </h:form>
+     	 	<p:dialog  showEffect="fade" hideEffect="fade" modal="true" resizable="false"
+		       		     widgetVar="uiblocker" showHeader="false" closeable="false">  
+				<h:panelGroup layout="block" >
+			 		<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</h:panelGroup>
+		   	</p:dialog>  						
+ 
+    </ui:define>
+
+</ui:composition>

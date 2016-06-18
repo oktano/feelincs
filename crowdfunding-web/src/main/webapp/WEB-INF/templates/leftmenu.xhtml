@@ -22,7 +22,15 @@
         <h:form id="menuform">
             <ps:menu id="sm_leftmenu">
                 <p:menuitem id="sm_dashboard" value="#{msgs['label.menu.left.dashboard']}" icon="icon-home-outline" outcome="dashboard" containerStyleClass="layout-menubar-active"/>
-             	<p:menuitem id="sm_development" value="#{msgs['label.menu.left.newdevelopment']}" icon="icon-home-outline" outcome="/development/newdevelopment" containerStyleClass="layout-menubar-active"/>
+
+               	<p:submenu label="Development" icon="icon-tasks">
+             		<p:menuitem  value="Development List" icon="icon-home-outline" outcome="developmentlist" containerStyleClass="layout-menubar-active"/>
+ 
+               	</p:submenu>
+   
+             	<p:menuitem id="sm_transaction" value="#{msgs['label.menu.left.transaction']}" icon="icon-home-outline" outcome="transaction.html" containerStyleClass="layout-menubar-active"/>
+
+             	<p:menuitem id="sm_dappsettings" value="#{msgs['label.menu.left.setting.appsettings']}" icon="icon-home-outline" outcome="applicationsettings.html" containerStyleClass="layout-menubar-active"/>
    
                	<p:submenu label="#{msgs['label.menu.left.managedropdown.title']}" icon="icon-tasks">
             		<p:menuitem  value="#{msgs['label.managedropdown.companycategory']}" icon="icon-home-outline" url="#{request.contextPath}/lookupdata.html?type=COMPANY_CATEGORY" containerStyleClass="layout-menubar-active"/>
