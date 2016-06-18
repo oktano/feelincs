@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Table(name="DEVELOPMENT")
 public class Development  extends BaseEntity{
 
+	private String name;
+	
 	private Company company;
 	
 	private String description;
@@ -27,6 +29,16 @@ public class Development  extends BaseEntity{
 	private List<Document>documents;
 	
 	private float sponsorEquitySharePercentage;
+	
+	private String dealType;
+	
+	private Account createdBy;
+
+	private Integer percentage;
+
+	private Integer totalInvestor;
+	
+	private String status;
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="COMPANY_ID")		
@@ -81,6 +93,56 @@ public class Development  extends BaseEntity{
 
 	public void setSponsorEquitySharePercentage(float sponsorEquitySharePercentage) {
 		this.sponsorEquitySharePercentage = sponsorEquitySharePercentage;
+	}
+
+	@Column(name="NAME")	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDealType() {
+		return dealType;
+	}
+
+	public void setDealType(String dealType) {
+		this.dealType = dealType;
+	}
+
+
+	public Integer getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(Integer percentage) {
+		this.percentage = percentage;
+	}
+
+	public Integer getTotalInvestor() {
+		return totalInvestor;
+	}
+
+	public void setTotalInvestor(Integer totalInvestor) {
+		this.totalInvestor = totalInvestor;
+	}
+
+	public Account getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Account createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	

@@ -5,7 +5,7 @@
               
    <persistence-unit name="crowdFunding" transaction-type="JTA">
       <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-      <jta-data-source>jjboss/datasources/MySQLDS</jta-data-source>  
+      <jta-data-source>java:/crowdFundingDS</jta-data-source>  
       <class>com.reactiveiq.crowdfunding.domain.Account</class>
       <class>com.reactiveiq.crowdfunding.domain.AccountStatus</class>
       <class>com.reactiveiq.crowdfunding.domain.Role</class>
@@ -17,6 +17,8 @@
  	  <class>com.reactiveiq.crowdfunding.domain.Development</class>
  	  <class>com.reactiveiq.crowdfunding.domain.Company</class>
  	  <class>com.reactiveiq.crowdfunding.domain.Document</class> 	  	
+ 	  <class>com.reactiveiq.crowdfunding.domain.ApplicationSetting</class> 	 
+ 	  <class>com.reactiveiq.crowdfunding.domain.Transaction</class> 	 
        <exclude-unlisted-classes>false</exclude-unlisted-classes>
        <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
