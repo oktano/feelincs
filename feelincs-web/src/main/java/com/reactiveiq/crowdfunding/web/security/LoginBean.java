@@ -59,7 +59,7 @@ public class LoginBean{
         		
         		result=false;
         		
-        		LOGGER.error("Authentication failed for {}",userName);
+        		LOGGER.error("Authentication failed for {}",userName,ex);
     	        
             	FacesMessage facesMsg = messageUtilBean.getFacesMessage(ex.getMessage());
                 FacesContext.getCurrentInstance().addMessage(null, facesMsg);
